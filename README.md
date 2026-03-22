@@ -157,10 +157,12 @@ Deadlock Detected!
 Developed as part of **Operating Systems coursework** to demonstrate deadlock detection techniques.
 
 ---
+Wakoli ian Wangila
 
-If you want, I can also:
+Kirinyaga University
 
-* Turn this into a **GitHub-ready README with badges**
-* Add **flowcharts/diagrams**
+Bsc Computer Science
+
+https://github.com/wakoli001
 * Or **comment your C code line-by-line for submission**
 # OS-deadlock
