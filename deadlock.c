@@ -1,0 +1,80 @@
+#include <stdio.h>
+
+#define MAX 10
+
+int main() {
+    int n, m; // n = processes, m = resource types
+    int alloc[MAX][MAX], request[MAX][MAX], avail[MAX];
+    int finish[MAX] = {0};
+    int i, j, k, found;
+
+    printf("Enter number of processes: ");
+    scanf("%d", &n);
+
+    printf("Enter number of resource types: ");
+    scanf("%d", &m);
+
+    // Allocation matrix
+    printf("Enter Allocation Matrix:\n");
+    for(i = 0; i < n; i++) {
+        for(j = 0; j < m; j++) {
+            scanf("%d", &alloc[i][j]);
+        }
+    }
+
+    // Request matrix
+    printf("Enter Request Matrix:\n");
+    for(i = 0; i < n; i++) {
+        for(j = 0; j < m; j++) {
+            scanf("%d", &request[i][j]);
+        }
+    }
+
+    // Available resources
+    printf("Enter Available Resources:\n");
+    for(j = 0; j < m; j++) {
+        scanf("%d", &avail[j]);
+    }
+
+    // Deadlock Detection Algorithm
+    for(k = 0; k < n; k++) {
+        for(i = 0; i < n; i++) {
+            if(finish[i] == 0) {
+                found = 1;
+
+                for(j = 0; j < m; j++) {
+                    if(request[i][j] > avail[j]) {
+                        found = 0;
+                        break;
+                    }
+                }
+
+                if(found) {
+                    for(j = 0; j < m; j++) {
+                        avail[j] += alloc[i][j];
+                    }
+                    finish[i] = 1;
+                }
+            }
+        }
+    }
+
+    // Check for deadlock
+    int deadlock = 0;
+    printf("\nProcesses in Deadlock:\n");
+
+    for(i = 0; i < n; i++) {
+        if(finish[i] == 0) {
+            printf("P%d ", i);
+            deadlock = 1;
+        }
+    }
+
+    if(deadlock == 0)
+        printf("No Deadlock Detected.\n");
+    else
+        printf("\nDeadlock Detected!\n");
+
+    return 0;
+}
+
